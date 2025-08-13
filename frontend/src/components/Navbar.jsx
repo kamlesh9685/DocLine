@@ -1,3 +1,4 @@
+/* Navbar.jsx */
 import React, { useContext, useState } from 'react'
 import { assets } from '../assets/assets'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -32,7 +33,7 @@ const Navbar = () => {
                 {/* Admin Button */}
                 <div className='relative'>
                     <button 
-                        onClick={() => window.open('http://localhost:1574', '_blank')} 
+                        onClick={() => window.open('https://docline-admin.onrender.com', '_blank')} 
                         className='py-2 px-5 rounded-full bg-gradient-to-r from-orange-500 to-teal-500 text-white font-medium hover:shadow-lg hover:scale-105 transition-all duration-200'
                     >
                         ADMIN
@@ -80,14 +81,15 @@ const Navbar = () => {
                         <NavLink onClick={()=>setShowMenu(false)} to='/about'><p className='px-6 py-4 rounded-xl hover:bg-orange-100 transition-colors duration-200 text-gray-700'>ℹ️ ABOUT</p></NavLink>
                         <NavLink onClick={()=>setShowMenu(false)} to='/contact'><p className='px-6 py-4 rounded-xl hover:bg-orange-100 transition-colors duration-200 text-gray-700'>📞 CONTACT</p></NavLink>
                         {/* Mobile Admin Button */}
-                        <NavLink onClick={()=>setShowMenu(false)} to='#'>
-                            <p 
-                                onClick={() => window.open('http://localhost:1574', '_blank')}
-                                className='px-6 py-4 rounded-full bg-gradient-to-r from-orange-500 to-teal-500 text-white text-center font-medium hover:shadow-lg hover:scale-105 transition-all duration-200 cursor-pointer'
-                            >
-                                ADMIN
-                            </p>
-                        </NavLink>
+                        <p 
+                            onClick={() => {
+                                setShowMenu(false);
+                                window.open('https://docline-admin.onrender.com', '_blank');
+                            }}
+                            className='px-6 py-4 rounded-full bg-gradient-to-r from-orange-500 to-teal-500 text-white text-center font-medium hover:shadow-lg hover:scale-105 transition-all duration-200 cursor-pointer'
+                        >
+                            ADMIN
+                        </p>
                     </ul>
                 </div>
             </div>
