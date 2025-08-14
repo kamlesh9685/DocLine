@@ -1,19 +1,23 @@
 /* Navbar.jsx */
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { assets } from '../assets/assets'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { AppContext } from '../context/AppContext';
 
 const Navbar = () => {
-
     const navigate = useNavigate();
-    const { token, setToken, userData } = useContext(AppContext)
-    const [showMenu, setShowMenu] = useState(false)
+    const { token, setToken, userData } = useContext(AppContext);
+    const [showMenu, setShowMenu] = useState(false);
 
     const logout = () => {
-        setToken(false)
-        localStorage.removeItem('token')
-    }
+        setToken(false);
+        localStorage.removeItem('token');
+    };
+
+    // Prevent background scroll when mobile menu is open
+    useEffect(() => {
+        document.body.style.overflow = showMenu ? "hidden" : "auto";
+    }, [showMenu]);
 
     return (
         <div className='flex items-center justify-between text-sm py-6 mb-8 border-b border-orange-200 bg-gradient-to-r from-orange-50 to-teal-50 backdrop-blur-sm sticky top-0 z-50 shadow-sm'>
@@ -29,8 +33,6 @@ const Navbar = () => {
                 <NavLink to='/doctors'><li className='py-2 px-4 rounded-lg hover:bg-orange-100 transition-colors duration-200 text-gray-700 hover:text-orange-600'>ALL DOCTORS</li></NavLink>
                 <NavLink to='/about'><li className='py-2 px-4 rounded-lg hover:bg-orange-100 transition-colors duration-200 text-gray-700 hover:text-orange-600'>ABOUT</li></NavLink>
                 <NavLink to='/contact'><li className='py-2 px-4 rounded-lg hover:bg-orange-100 transition-colors duration-200 text-gray-700 hover:text-orange-600'>CONTACT</li></NavLink>
-
-                {/* Admin Button */}
                 <div className='relative'>
                     <button 
                         onClick={() => window.open('https://docline-admin.onrender.com', '_blank')} 
@@ -41,7 +43,7 @@ const Navbar = () => {
                 </div>
             </ul>
 
-            {/* Right side */}
+            {/* Right Side */}
             <div className='flex items-center gap-4'>
                 {token && userData ? (
                     <div className='flex items-center gap-3 cursor-pointer group relative'>
@@ -68,19 +70,21 @@ const Navbar = () => {
                 </button>
 
                 {/* Mobile Menu */}
-                <div className={` ${showMenu ?'fixed w-full' : 'h-0 w-0'} md:hidden right-0 top-0 bottom-0 z-50 overflow-hidden bg-white/95 backdrop-blur-md transition-all duration-300`}>
+                <div className={`fixed top-0 right-0 h-full w-64 bg-white/95 backdrop-blur-md shadow-lg transform ${showMenu ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 md:hidden z-50`}>
+                    {/* Header */}
                     <div className='flex items-center justify-between px-6 py-6 border-b border-orange-200'>
                         <assets.logo />
                         <button onClick={()=>setShowMenu(false)} className='w-10 h-10 flex items-center justify-center rounded-lg hover:bg-orange-100 transition-colors duration-200'>
                             <img className='w-6' src={assets.cross_icon} alt="" />
                         </button>
                     </div>
+
+                    {/* Links */}
                     <ul className='flex flex-col gap-2 mt-8 px-6 text-lg font-medium'>
-                        <NavLink onClick={()=>setShowMenu(false)} to='/'><p className='px-6 py-4 rounded-xl hover:bg-orange-100 transition-colors duration-200 text-gray-700'>🏠 HOME</p></NavLink>
-                        <NavLink onClick={()=>setShowMenu(false)} to='/doctors'><p className='px-6 py-4 rounded-xl hover:bg-orange-100 transition-colors duration-200 text-gray-700'>👨‍⚕️ ALL DOCTORS</p></NavLink>
-                        <NavLink onClick={()=>setShowMenu(false)} to='/about'><p className='px-6 py-4 rounded-xl hover:bg-orange-100 transition-colors duration-200 text-gray-700'>ℹ️ ABOUT</p></NavLink>
-                        <NavLink onClick={()=>setShowMenu(false)} to='/contact'><p className='px-6 py-4 rounded-xl hover:bg-orange-100 transition-colors duration-200 text-gray-700'>📞 CONTACT</p></NavLink>
-                        {/* Mobile Admin Button */}
+                        <NavLink onClick={()=>setShowMenu(false)} to='/' className="block px-6 py-4 rounded-xl hover:bg-orange-100 transition-colors duration-200 text-gray-700">🏠 HOME</NavLink>
+                        <NavLink onClick={()=>setShowMenu(false)} to='/doctors' className="block px-6 py-4 rounded-xl hover:bg-orange-100 transition-colors duration-200 text-gray-700">👨‍⚕️ ALL DOCTORS</NavLink>
+                        <NavLink onClick={()=>setShowMenu(false)} to='/about' className="block px-6 py-4 rounded-xl hover:bg-orange-100 transition-colors duration-200 text-gray-700">ℹ️ ABOUT</NavLink>
+                        <NavLink onClick={()=>setShowMenu(false)} to='/contact' className="block px-6 py-4 rounded-xl hover:bg-orange-100 transition-colors duration-200 text-gray-700">📞 CONTACT</NavLink>
                         <p 
                             onClick={() => {
                                 setShowMenu(false);
@@ -97,4 +101,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default Navbar;
