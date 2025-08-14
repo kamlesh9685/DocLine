@@ -18,7 +18,8 @@ app.use(express.json())
 
 app.use(cors({
   origin: ['https://docline-frontend.onrender.com'], // yaha frontend live URL
-  credentials: true
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true 
 }))
 
 // API routes
