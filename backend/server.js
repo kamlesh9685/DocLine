@@ -15,8 +15,9 @@ connectCloudinary()
 
 // Middlewares
 app.use(express.json())
+
 app.use(cors({
-  origin: ['https://docline-frontend1.onrender.com'], // yaha frontend live URL
+  origin: ['https://docline-frontend.onrender.com'], // yaha frontend live URL
   credentials: true
 }))
 
