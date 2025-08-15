@@ -1,7 +1,7 @@
 /* Navbar.jsx */
-import React, { useContext, useState, useEffect } from 'react'
-import { assets } from '../assets/assets'
-import { NavLink, useNavigate } from 'react-router-dom'
+import React, { useContext, useState, useEffect } from 'react';
+import { assets } from '../assets/assets';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 
 const Navbar = () => {
@@ -69,8 +69,8 @@ const Navbar = () => {
                     <img className='w-6' src={assets.menu_icon} alt='' />
                 </button>
 
-                {/* Mobile Menu */}
-                <div className={`fixed top-0 right-0 h-full w-64 bg-white/95 backdrop-blur-md shadow-lg transform ${showMenu ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 md:hidden z-50`}>
+                {/* Mobile Fullscreen Menu */}
+                <div className={`fixed inset-0 bg-white z-50 transform ${showMenu ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 md:hidden`}>
                     {/* Header */}
                     <div className='flex items-center justify-between px-6 py-6 border-b border-orange-200'>
                         <assets.logo />
@@ -98,7 +98,7 @@ const Navbar = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Navbar;
