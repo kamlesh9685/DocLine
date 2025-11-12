@@ -65,7 +65,7 @@ yaml:
 
 ### **1. Clone Repository**
 ```
-git clone https://github.com/yourusername/doctor-appointment-system.git
+git clone https://github.com/kamlesh9685/DocLine.git
 cd doctor-appointment-system
 ```
 
